@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Hushulin\LaravelEloquentRqlite\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelEloquentRqliteCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-eloquent-rqlite';
 
     public $description = 'My command';
 

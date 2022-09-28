@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "hushulin/laravel-eloquent-rqlite",
+    "description": "larevel eloquent for rqlite",
     "keywords": [
-        ":vendor_name",
+        "hushulin",
         "laravel",
-        ":package_slug"
+        "laravel-eloquent-rqlite"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/hushulin/laravel-eloquent-rqlite",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "hushulin",
+            "email": "hushulin12321@gmail.com",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Hushulin\\LaravelEloquentRqlite\\": "src",
+            "Hushulin\\LaravelEloquentRqlite\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Hushulin\\LaravelEloquentRqlite\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -56,10 +56,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Hushulin\\LaravelEloquentRqlite\\LaravelEloquentRqliteServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelEloquentRqlite": "Hushulin\\LaravelEloquentRqlite\\Facades\\LaravelEloquentRqlite"
             }
         }
     },
