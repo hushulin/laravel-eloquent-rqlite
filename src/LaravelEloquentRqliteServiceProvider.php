@@ -2,9 +2,9 @@
 
 namespace Hushulin\LaravelEloquentRqlite;
 
+use Hushulin\LaravelEloquentRqlite\Commands\LaravelEloquentRqliteCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Hushulin\LaravelEloquentRqlite\Commands\LaravelEloquentRqliteCommand;
 
 class LaravelEloquentRqliteServiceProvider extends PackageServiceProvider
 {

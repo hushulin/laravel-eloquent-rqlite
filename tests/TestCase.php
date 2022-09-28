@@ -2,9 +2,9 @@
 
 namespace Hushulin\LaravelEloquentRqlite\Tests;
 
+use Hushulin\LaravelEloquentRqlite\LaravelEloquentRqliteServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Hushulin\LaravelEloquentRqlite\LaravelEloquentRqliteServiceProvider;
 
 class TestCase extends Orchestra
 {
