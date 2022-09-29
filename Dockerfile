@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-buster
+FROM php:8.1-fpm-buster
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 RUN sed -i 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
@@ -11,7 +11,7 @@ RUN sed -i 's/max_execution_time\ =\ 30/max_execution_time\ =\ 600/g' /usr/local
 
 RUN apt-get update && apt-get install -y libevent-dev openssl libssl-dev
 RUN docker-php-ext-install sockets && docker-php-ext-enable sockets
-RUN pecl install redis event && docker-php-ext-enable redis event
+RUN pecl install redis && docker-php-ext-enable redis
 RUN apt-get update \
     # gd
     #&& apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libpng-dev libwebp-dev  \
