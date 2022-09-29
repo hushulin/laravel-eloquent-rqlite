@@ -1,18 +1,14 @@
 <?php
 
-
 namespace Hushulin\LaravelEloquentRqlite\Driver;
 
-
-use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Driver\Result;
 use Doctrine\DBAL\ParameterType;
 
 class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Statement
 {
-
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function bindValue($param, $value, $type = ParameterType::STRING)
     {
@@ -20,7 +16,7 @@ class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Sta
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function execute($params = null): Result
     {

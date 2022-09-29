@@ -1,16 +1,11 @@
 <?php
 
-
 namespace Hushulin\LaravelEloquentRqlite\Driver;
-
-
-use Doctrine\DBAL\Driver\Exception;
 
 class RqliteResult implements \Doctrine\DBAL\Driver\Result
 {
-
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function fetchNumeric()
     {
@@ -18,7 +13,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function fetchAssociative()
     {
@@ -26,7 +21,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function fetchOne()
     {
@@ -34,7 +29,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function fetchAllNumeric(): array
     {
@@ -43,7 +38,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function fetchAllAssociative(): array
     {
@@ -52,7 +47,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function fetchFirstColumn(): array
     {
@@ -61,7 +56,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function rowCount(): int
     {
@@ -70,7 +65,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function columnCount(): int
     {
@@ -79,7 +74,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function free(): void
     {

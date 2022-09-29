@@ -34,8 +34,10 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
 
     /**
      * 查询
-     * @param string $sql
+     *
+     * @param  string  $sql
      * @return Result
+     *
      * @throws Exception
      */
     public function query(string $sql): Result
@@ -45,9 +47,11 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
 
     /**
      * 给变量加引号，来自oci8的实现：如果是numeric 直接返回。如果是'再加一个'，如果是特殊字符，加转义
+     *
      * @see \Doctrine\DBAL\Driver\OCI8\Connection::quote
-     * @param mixed $value
-     * @param int $type
+     *
+     * @param  mixed  $value
+     * @param  int  $type
      * @return float|int|string
      */
     public function quote($value, $type = ParameterType::STRING)
@@ -58,24 +62,28 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
 
         $value = str_replace("'", "''", $value);
 
-        return "'" . addcslashes($value, "\000\n\r\\\032") . "'";
+        return "'".addcslashes($value, "\000\n\r\\\032")."'";
     }
 
     /**
      * 执行并返回影响行数
-     * @param string $sql
+     *
+     * @param  string  $sql
      * @return int
+     *
      * @throws Exception
      */
     public function exec(string $sql): int
     {
         Log::debug($sql);
+
         return $this->prepare($sql)->execute()->rowCount();
     }
 
     /**
      * @todo 返回上次插入id
-     * @param null $name
+     *
+     * @param  null  $name
      * @return int
      */
     public function lastInsertId($name = null): int
@@ -109,6 +117,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
 
     /**
      * 原生连接没有，返回http client
+     *
      * @return Client
      */
     public function getNativeConnection(): Client
