@@ -1,22 +1,17 @@
 <?php
 
-
 namespace Hushulin\LaravelEloquentRqlite\Connector;
 
-
-use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Driver\Result;
 use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\ParameterType;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Support\Str;
 
 final class Connection implements \Doctrine\DBAL\Driver\Connection
 {
-
     /**
-     * @var Client $connection
+     * @var Client
      */
     private $connection;
 
@@ -47,13 +42,14 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     {
         try {
             $response = $this->connection->post('/db/execute', ['']);
-            $result = json_decode($response->getBody(),true);
+            $result = json_decode($response->getBody(), true);
             if (isset($result[0]['error'])) {
                 throw new \PDOException($result[0]['error']);
             }
             $this->lastInsertId = $result['results']['last_insert_id'] ?? 0;
+
             return $result['results']['rows_affected'] ?? 0;
-        }catch (GuzzleException $e) {
+        } catch (GuzzleException $e) {
             return 0;
         }
     }
