@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-buster
+FROM php:7.4-fpm-buster
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 RUN sed -i 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
@@ -41,9 +41,9 @@ RUN apt-get update \
 COPY . /app
 WORKDIR /app
 #RUN composer config -g repo.packagist composer https://packagist.phpcomposer.com
-#RUN composer config -g repos.packagist composer https://mirrors.aliyun.com/composer/
+RUN composer config -g repos.packagist composer https://mirrors.aliyun.com/composer/
 #RUN composer config -g repos.packagist composer https://php.cnpkg.org
-#RUN composer install
+RUN composer install
 #RUN php artisan optimize:clear
 #RUN composer dump-autoload
 #RUN ln -s /app/storage/app/uploads /app/public/

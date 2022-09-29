@@ -27,6 +27,9 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
+        config()->set('database.connections.rqlite.driver', 'rqlite');
+        config()->set('database.connections.rqlite.host', 'http://rqlite:4001');
+        config()->set('database.connections.rqlite.database', ':memory:');
 
         /*
         $migration = include __DIR__.'/../database/migrations/create_laravel-eloquent-rqlite_table.php.stub';
