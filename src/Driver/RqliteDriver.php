@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hushulin\LaravelEloquentRqlite\Driver;
 
 use Doctrine\DBAL\Driver\AbstractSQLiteDriver;
@@ -9,20 +8,21 @@ use Hushulin\LaravelEloquentRqlite\Connector\Connection;
 
 class RqliteDriver extends AbstractSQLiteDriver
 {
-
     /**
-     * @param array $params
+     * @param  array  $params
      * @return Connection
      */
     public function connect(array $params): Connection
     {
         $connection = $this->createConnection($params);
+
         return new Connection($connection);
     }
 
     /**
      * Create a guzzle http client for rqlite
-     * @param array $params
+     *
+     * @param  array  $params
      * @return Client
      */
     private function createConnection(array $params): Client
@@ -32,5 +32,4 @@ class RqliteDriver extends AbstractSQLiteDriver
             'allow_redirects' => true,
         ]);
     }
-
 }
