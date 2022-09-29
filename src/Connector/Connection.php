@@ -46,7 +46,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     public function exec(string $sql): int
     {
         try {
-            $response = $this->connection->post('/db/execute', ['']);
+            $response = $this->connection->post('/db/execute', ['json' => [[$sql]]]);
             $result = json_decode($response->getBody(),true);
             if (isset($result[0]['error'])) {
                 throw new \PDOException($result[0]['error']);
