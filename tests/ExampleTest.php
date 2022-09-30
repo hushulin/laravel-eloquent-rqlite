@@ -6,24 +6,31 @@ it('can test', function () {
     expect(true)->toBeTrue();
 });
 
+
+it('rqlite count 2 rows', function () {
+    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', '<', 3)->count();
+    dump('----------- count 2 rows --------------',$c);
+    expect($c)->toEqual(2);
+});
+
 it('rqlite insert get id and has no default value', function () {
-    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->insertGetId(['name' => 'eric hu']);
+    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->insertGetId(['name' => 'eric hu'], 'laravel_eloquent_rqlite_table');
     dump($c);
     expect($c)->toBeInt();
 });
 
-return;
 
-it('rqlite select 2 rows', function () {
-    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->take(2)->get();
+it('rqlite insert get back data', function () {
+    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->insert(['name' => 'eric hu']);
     dump($c);
     expect($c)->toBeObject();
 });
 
-it('rqlite count 2 rows', function () {
-    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->take(2)->count();
-    dump($c);
-    expect($c)->toEqual(2);
+
+it('rqlite select 2 rows', function () {
+    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->take(2)->get();
+    dump('---------- get 2 rows ------------', $c);
+    expect($c)->toBeObject();
 });
 
 it('rqlite insert bind all param', function () {
