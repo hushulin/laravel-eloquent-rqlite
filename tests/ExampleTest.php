@@ -6,10 +6,9 @@ it('can test', function () {
     expect(true)->toBeTrue();
 });
 
-
 it('rqlite count 2 rows', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', '<', 3)->count();
-    dump('----------- count 2 rows --------------',$c);
+    dump('----------- count 2 rows --------------', $c);
     expect($c)->toEqual(2);
 });
 
@@ -19,13 +18,11 @@ it('rqlite insert get id and has no default value', function () {
     expect($c)->toBeInt();
 });
 
-
 it('rqlite insert get back data', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->insert(['name' => 'eric hu']);
     dump($c);
     expect($c)->toBeObject();
 });
-
 
 it('rqlite select 2 rows', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->take(2)->get();

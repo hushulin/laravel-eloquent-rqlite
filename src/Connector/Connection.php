@@ -83,13 +83,12 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
      */
     public function lastInsertId($name = null): int
     {
-
         if ($name == null) {
             return 0;
         }
 
         try {
-            $res = $this->connection->post('/db/query', ['json' => ['SELECT seq FROM sqlite_sequence WHERE name = ' . $this->quote($name)]]);
+            $res = $this->connection->post('/db/query', ['json' => ['SELECT seq FROM sqlite_sequence WHERE name = '.$this->quote($name)]]);
             $result = json_decode($res->getBody(), true);
             if (isset($result['results'])) {
                 collect($result['results'])->map(function ($item) {
@@ -98,6 +97,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
                     }
                 });
             }
+
             return (int) $result['results'][0]['values'][0][0];
         } catch (GuzzleException | PDOException $e) {
             return 0;
