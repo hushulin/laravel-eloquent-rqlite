@@ -37,7 +37,7 @@ it('rqlite table not found', function () {
         $c = DB::connection('rqlite')->table('not_found_table')->get();
         dump($c);
         expect($c)->toBeObject();
-    }catch (\Exception $exception) {
+    } catch (\Exception $exception) {
         expect($exception->getMessage())->toEqual('no such table: not_found_table (SQL: select * from "not_found_table")');
     }
 });

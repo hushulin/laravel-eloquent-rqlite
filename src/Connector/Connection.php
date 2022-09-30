@@ -9,7 +9,6 @@ use Doctrine\DBAL\ParameterType;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Hushulin\LaravelEloquentRqlite\Driver\RqliteStatement;
-use Illuminate\Support\Facades\Log;
 
 final class Connection implements \Doctrine\DBAL\Driver\Connection
 {
@@ -31,6 +30,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
 
     /**
      * 查询
+     *
      * @param  string  $sql
      * @return Result
      *
@@ -76,6 +76,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
 
     /**
      * @todo 返回上次插入的主键值，未实现
+     *
      * @param  null  $name
      * @return int
      */

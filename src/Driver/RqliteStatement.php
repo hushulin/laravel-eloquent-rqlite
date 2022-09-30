@@ -7,12 +7,10 @@ use Doctrine\DBAL\ParameterType;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Str;
-use PDO;
 use PDOException;
 
 class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Statement
 {
-
     /**
      * @var string
      */
@@ -44,6 +42,7 @@ class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Sta
 
     /**
      * {@inheritDoc}
+     *
      * @throws GuzzleException
      */
     public function execute($params = null): Result
@@ -53,13 +52,15 @@ class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Sta
 
     /**
      * 没有pdo，写pdo方法覆盖
-     * @param null $how
-     * @param null $class_name
-     * @param null $ctor_args
+     *
+     * @param  null  $how
+     * @param  null  $class_name
+     * @param  null  $ctor_args
      * @return array|void
+     *
      * @throws \Doctrine\DBAL\Driver\Exception
      */
-    public function fetchAll($how = NULL, $class_name = NULL, $ctor_args = NULL)
+    public function fetchAll($how = null, $class_name = null, $ctor_args = null)
     {
         $results = $this->requestRqliteByGuzzle();
 
@@ -67,10 +68,8 @@ class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Sta
 
         $tmp = [];
         if (isset($results['values'])) {
-            foreach ($results['values'] as $key => $item)
-            {
-                foreach ($results['columns'] as $k => $i)
-                {
+            foreach ($results['values'] as $key => $item) {
+                foreach ($results['columns'] as $k => $i) {
                     //$tmp[$key][$k] = $item[$k];
                     $tmp[$key][$i] = $item[$k];
                 }
@@ -82,27 +81,30 @@ class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Sta
 
     /**
      * 构建 array of request json data
-     * @param string $sql
-     * @param array $parameterizedMap
+     *
+     * @param  string  $sql
+     * @param  array  $parameterizedMap
      * @return array[]
      */
     private function makeRequestData(string $sql, array $parameterizedMap): array
     {
         return [
-            [$sql,...$parameterizedMap]
+            [$sql, ...$parameterizedMap],
         ];
     }
 
     /**
      * 执行后并返回结果
+     *
      * @return mixed
+     *
      * @throws GuzzleException
      */
     private function requestRqliteByGuzzle()
     {
-        if (Str::startsWith(Str::upper($this->sql),['SELECT','PRAGMA'])) {
+        if (Str::startsWith(Str::upper($this->sql), ['SELECT', 'PRAGMA'])) {
             $uri = '/db/query';
-        }else {
+        } else {
             $uri = '/db/execute';
         }
 
@@ -116,7 +118,7 @@ class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Sta
                 }
             });
         }
+
         return $result['results'];
     }
-
 }

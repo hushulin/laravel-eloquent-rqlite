@@ -15,6 +15,7 @@ class RqliteDriver extends AbstractSQLiteDriver
     public function connect(array $params): Connection
     {
         $connection = $this->createConnection($params);
+
         return new Connection($connection);
     }
 

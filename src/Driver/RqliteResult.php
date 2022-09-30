@@ -6,7 +6,6 @@ use Doctrine\DBAL\Driver\Exception;
 
 class RqliteResult implements \Doctrine\DBAL\Driver\Result
 {
-
     /**
      * @var array
      */
@@ -20,7 +19,6 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     public function __construct(array $results)
     {
         $this->results = $results;
-
     }
 
     /**
@@ -145,7 +143,6 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     }
 
     /**
-     *
      * @throws Exception
      */
     public function fetchAll(): array
@@ -158,5 +155,4 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
 
         return $rows;
     }
-
 }
