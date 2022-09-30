@@ -18,8 +18,6 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
      */
     private Client $connection;
 
-    private int $lastInsertId = 0;
-
     /** @internal The connection can be only instantiated by its driver. */
     public function __construct(Client $connection)
     {
@@ -28,13 +26,11 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
 
     public function prepare(string $sql): Statement
     {
-        // TODO: Implement prepare() method.
-        return new RqliteStatement();
+        return new RqliteStatement($sql, $this->connection);
     }
 
     /**
      * 查询
-     *
      * @param  string  $sql
      * @return Result
      *
@@ -75,14 +71,11 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
      */
     public function exec(string $sql): int
     {
-        Log::debug($sql);
-
         return $this->prepare($sql)->execute()->rowCount();
     }
 
     /**
-     * @todo 返回上次插入id
-     *
+     * @todo 返回上次插入的主键值，未实现
      * @param  null  $name
      * @return int
      */
@@ -116,7 +109,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     }
 
     /**
-     * 原生连接没有，返回http client
+     * 原生连接没有，返回http client 代替 pdo connection
      *
      * @return Client
      */

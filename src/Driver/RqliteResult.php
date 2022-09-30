@@ -2,14 +2,39 @@
 
 namespace Hushulin\LaravelEloquentRqlite\Driver;
 
+use Doctrine\DBAL\Driver\Exception;
+
 class RqliteResult implements \Doctrine\DBAL\Driver\Result
 {
+
+    /**
+     * @var array
+     */
+    private array $results;
+
+    /**
+     * @var int
+     */
+    private int $num = 0;
+
+    public function __construct(array $results)
+    {
+        $this->results = $results;
+
+    }
+
     /**
      * {@inheritDoc}
      */
     public function fetchNumeric()
     {
-        // TODO: Implement fetchNumeric() method.
+        $row = $this->fetch();
+
+        if ($row === false) {
+            return false;
+        }
+
+        return $row;
     }
 
     /**
@@ -17,7 +42,13 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
      */
     public function fetchAssociative()
     {
-        // TODO: Implement fetchAssociative() method.
+        $row = $this->fetch();
+
+        if ($row === false) {
+            return false;
+        }
+
+        return array_combine($this->results['columns'], $row);
     }
 
     /**
@@ -25,7 +56,13 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
      */
     public function fetchOne()
     {
-        // TODO: Implement fetchOne() method.
+        $row = $this->fetch();
+
+        if ($row === false) {
+            return false;
+        }
+
+        return reset($row);
     }
 
     /**
@@ -33,8 +70,13 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
      */
     public function fetchAllNumeric(): array
     {
-        // TODO: Implement fetchAllNumeric() method.
-        return [];
+        $rows = [];
+
+        while (($row = $this->fetchNumeric()) !== false) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 
     /**
@@ -42,8 +84,13 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
      */
     public function fetchAllAssociative(): array
     {
-        // TODO: Implement fetchAllAssociative() method.
-        return [];
+        $rows = [];
+
+        while (($row = $this->fetchAssociative()) !== false) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 
     /**
@@ -51,8 +98,13 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
      */
     public function fetchFirstColumn(): array
     {
-        // TODO: Implement fetchFirstColumn() method.
-        return [];
+        $rows = [];
+
+        while (($row = $this->fetchOne()) !== false) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 
     /**
@@ -60,8 +112,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
      */
     public function rowCount(): int
     {
-        // TODO: Implement rowCount() method.
-        return 0;
+        return isset($this->results['values']) ? count($this->results['values']) : 0;
     }
 
     /**
@@ -69,8 +120,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
      */
     public function columnCount(): int
     {
-        // TODO: Implement columnCount() method.
-        return 0;
+        return count($this->results['columns']);
     }
 
     /**
@@ -78,6 +128,35 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
      */
     public function free(): void
     {
-        // TODO: Implement free() method.
+        $this->results = [];
     }
+
+    private function fetch()
+    {
+        if (! isset($this->results['values'])) {
+            return false;
+        }
+
+        if (! isset($this->results['values'][$this->num])) {
+            return false;
+        }
+
+        return $this->results['values'][$this->num++];
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    public function fetchAll(): array
+    {
+        $rows = [];
+
+        while (($row = $this->fetchAssociative()) !== false) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
 }

@@ -28,12 +28,10 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
         config()->set('database.connections.rqlite.driver', 'rqlite');
-        config()->set('database.connections.rqlite.host', 'http://rqlite:4001');
+        config()->set('database.connections.rqlite.host', 'http://rqlite-test.lyky.com.cn:80');
         config()->set('database.connections.rqlite.database', ':memory:');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-eloquent-rqlite_table.php.stub';
-        $migration->up();
-        */
+        //$migration = include __DIR__.'/../database/migrations/create_eloquent_rqlite_table.php';
+        //$migration->up();
     }
 }
