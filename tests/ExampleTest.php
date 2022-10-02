@@ -14,13 +14,13 @@ it('rqlite count 2 rows', function () {
 
 it('rqlite insert get id and has no default value', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->insertGetId(['name' => 'eric hu'], 'laravel_eloquent_rqlite_table');
-    dump($c);
+    dump('-------------insert get id --------------', $c);
     expect($c)->toBeInt();
 });
 
 it('rqlite insert get back data', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->insert(['name' => 'eric hu']);
-    dump($c);
+    dump('---------------insert get affect object ---------', $c);
     expect($c)->toBeObject();
 });
 
@@ -32,7 +32,7 @@ it('rqlite select 2 rows', function () {
 
 it('rqlite insert bind all param', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->insertGetId(['name' => 'ok', 'last_login_date' => date('Y-m-d')]);
-    dump($c);
+    dump('-------------- insert get id with all fill -----------', $c);
     expect($c)->toBeInt();
 });
 
@@ -48,6 +48,31 @@ it('rqlite table not found', function () {
 
 it('rqlite select 0 row', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', 1000)->get();
-    dump($c);
+    dump('---------------- select no match item ------------------', $c);
     expect($c)->toBeObject();
+});
+
+
+it('rqlite paginate', function () {
+    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->paginate(10);
+    dump('------------ paginate ---------', $c);
+    expect($c)->toBeInstanceOf('Illuminate\Pagination\LengthAwarePaginator');
+});
+
+it('rqlite pluck', function () {
+    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', '<', 3)->pluck('name');
+    dump('---------------- rqlite pluck ------------------', $c);
+    expect($c)->toBeObject();
+});
+
+it('rqlite value', function () {
+    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', '<', 3)->value('name');
+    dump('---------------- rqlite value ------------------', $c);
+    expect($c)->toBeString();
+});
+
+it('rqlite first', function () {
+    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', '<', 3)->first();
+    dump('---------------- rqlite first ------------------', $c);
+    expect($c)->toBeArray();
 });
