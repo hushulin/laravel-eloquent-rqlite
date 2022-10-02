@@ -19,6 +19,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     public function __construct(array $results)
     {
         $this->results = $results;
+
     }
 
     /**

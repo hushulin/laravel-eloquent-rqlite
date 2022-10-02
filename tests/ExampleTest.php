@@ -6,6 +6,12 @@ it('can test', function () {
     expect(true)->toBeTrue();
 });
 
+it('rqlite first', function () {
+    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', '<', 3)->first();
+    dump('---------------- rqlite first ------------------', $c);
+    expect($c)->toBeArray();
+});
+
 it('rqlite count 2 rows', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', '<', 3)->count();
     dump('----------- count 2 rows --------------', $c);
@@ -71,8 +77,3 @@ it('rqlite value', function () {
     expect($c)->toBeString();
 });
 
-it('rqlite first', function () {
-    $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', '<', 3)->first();
-    dump('---------------- rqlite first ------------------', $c);
-    expect($c)->toBeArray();
-});

@@ -70,6 +70,7 @@ class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Sta
         if (isset($results['values'])) {
             foreach ($results['values'] as $key => $item) {
                 foreach ($results['columns'] as $k => $i) {
+                    //\PDO::FETCH_BOTH
                     //$tmp[$key][$k] = $item[$k];
                     $tmp[$key][$i] = $item[$k];
                 }
