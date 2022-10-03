@@ -1,13 +1,27 @@
 <?php
 
+use Hushulin\LaravelEloquentRqlite\Tests\EloquentRqlite;
 use Illuminate\Support\Facades\DB;
 
 it('can test', function () {
     expect(true)->toBeTrue();
 });
 
+it('rqlite transaction', function () {
+    try {
+        DB::connection('rqlite')->transaction(function () {
+            EloquentRqlite::query()->where('id', 1)->update([
+                'last_login_date' => date('Y-m-d'),
+            ]);
+            sleep(30);
+        });
+        expect(1)->toBeInt();
+    } catch (Throwable $e) {
+    }
+})->skip(true);
+
 it('rqlite model', function () {
-    $c = \Hushulin\LaravelEloquentRqlite\Tests\EloquentRqlite::query()->first();
+    $c = EloquentRqlite::query()->first();
     dump('--------------- rqlite eloquent model first id ------------------', $c->id);
     expect($c)->toBeInstanceOf('Hushulin\LaravelEloquentRqlite\Tests\EloquentRqlite');
 });
