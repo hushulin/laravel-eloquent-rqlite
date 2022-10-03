@@ -6,6 +6,12 @@ it('can test', function () {
     expect(true)->toBeTrue();
 });
 
+it('rqlite model', function () {
+    $c = \Hushulin\LaravelEloquentRqlite\Tests\EloquentRqlite::query()->first();
+    dump('--------------- rqlite eloquent model first id ------------------', $c->id);
+    expect($c)->toBeInstanceOf('Hushulin\LaravelEloquentRqlite\Tests\EloquentRqlite');
+});
+
 it('rqlite first', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->where('id', '<', 3)->first();
     dump('---------------- rqlite first ------------------', $c);
