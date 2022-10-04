@@ -23,6 +23,32 @@ You can install the package via composer:
 composer require hushulin/laravel-eloquent-rqlite
 ```
 
+lumen framework add below to bootstrap/app.php
+```php
+$app->register(Hushulin\LaravelEloquentRqlite\LaravelEloquentRqliteServiceProvider::class); 
+```
+
+lumen framework add config to config/database.php
+```php 
+'connections' => [
+        
+        'rqlite' => [
+            'driver' => 'rqlite',
+            'host' => '',
+            'database' => ':memory:',
+            'username' => '',
+            'password' => '',
+        ],
+
+        'sqlite' => [
+            'driver' => 'sqlite',
+            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'prefix' => env('DB_PREFIX', ''),
+        ],
+        // ...
+   ]
+```
+
 You can publish and run the migrations with:
 
 ```bash
@@ -47,13 +73,6 @@ Optionally, you can publish the views using
 
 ```bash
 php artisan vendor:publish --tag="laravel-eloquent-rqlite-views"
-```
-
-## Usage
-
-```php
-$laravelEloquentRqlite = new Hushulin\LaravelEloquentRqlite();
-echo $laravelEloquentRqlite->echoPhrase('Hello, Hushulin!');
 ```
 
 ## Testing

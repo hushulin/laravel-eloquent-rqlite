@@ -27,9 +27,17 @@ class RqliteDriver extends AbstractSQLiteDriver
      */
     private function createConnection(array $params): Client
     {
-        return new Client([
-            'base_uri' => $params['host'],
-            'allow_redirects' => true,
-        ]);
+        if (isset($params['username']) && !empty($params['username'])) {
+            return new Client([
+                'base_uri' => $params['host'],
+                'allow_redirects' => true,
+                'auth' => [$params['username'], $params['password']],
+            ]);
+        }else {
+            return new Client([
+                'base_uri' => $params['host'],
+                'allow_redirects' => true,
+            ]);
+        }
     }
 }

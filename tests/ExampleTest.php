@@ -13,12 +13,12 @@ it('rqlite transaction', function () {
             EloquentRqlite::query()->where('id', 1)->update([
                 'last_login_date' => date('Y-m-d'),
             ]);
-            sleep(30);
+            sleep(3);
         });
         expect(1)->toBeInt();
     } catch (Throwable $e) {
     }
-})->skip(true);
+})->skip(false);
 
 it('rqlite model', function () {
     $c = EloquentRqlite::query()->first();
