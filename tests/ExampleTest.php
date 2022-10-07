@@ -7,6 +7,17 @@ it('can test', function () {
     expect(true)->toBeTrue();
 });
 
+it('rqlite create many', function () {
+    $c = EloquentRqlite::query()->insert([
+        ['name' => '33345'],
+        ['name' => 'wfsds'],
+        ['name' => 'fdsfs'],
+        ['name' => 'fdsf'],
+    ]);
+    dump('----------------- create 4 rows --------------',$c);
+    expect($c)->toBeObject();
+});
+
 it('rqlite transaction', function () {
     try {
         DB::connection('rqlite')->transaction(function () {
