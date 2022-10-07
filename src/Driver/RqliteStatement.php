@@ -53,9 +53,9 @@ class RqliteStatement extends \PDOStatement implements \Doctrine\DBAL\Driver\Sta
     /**
      * 没有pdo，写pdo方法覆盖
      *
-     * @param null $how
-     * @param null $class_name
-     * @param null $ctor_args
+     * @param  null  $how
+     * @param  null  $class_name
+     * @param  null  $ctor_args
      * @return array
      *
      * @throws GuzzleException

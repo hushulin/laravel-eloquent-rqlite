@@ -14,7 +14,7 @@ it('rqlite create many', function () {
         ['name' => 'fdsfs'],
         ['name' => 'fdsf'],
     ]);
-    dump('----------------- create 4 rows --------------',$c);
+    dump('----------------- create 4 rows --------------', $c);
     expect($c)->toBeObject();
 });
 
@@ -89,7 +89,6 @@ it('rqlite select 0 row', function () {
     expect($c)->toBeObject();
 });
 
-
 it('rqlite paginate', function () {
     $c = DB::connection('rqlite')->table('laravel_eloquent_rqlite_table')->paginate(10);
     dump('------------ paginate ---------', $c);
@@ -107,4 +106,3 @@ it('rqlite value', function () {
     dump('---------------- rqlite value ------------------', $c);
     expect($c)->toBeString();
 });
-

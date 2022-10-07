@@ -19,7 +19,6 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
     public function __construct(array $results)
     {
         $this->results = $results;
-
     }
 
     /**
@@ -145,6 +144,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
 
     /**
      * @deprecated 仅参考
+     *
      * @throws Exception
      */
     public function fetchAll(): array
