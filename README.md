@@ -1,7 +1,6 @@
 # larevel eloquent for rqlite
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hushulin/laravel-eloquent-rqlite.svg?style=flat-square)](https://packagist.org/packages/hushulin/laravel-eloquent-rqlite)
-
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/hushulin/laravel-eloquent-rqlite/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/hushulin/laravel-eloquent-rqlite/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/hushulin/laravel-eloquent-rqlite.svg?style=flat-square)](https://packagist.org/packages/hushulin/laravel-eloquent-rqlite)
 
