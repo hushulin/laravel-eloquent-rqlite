@@ -1,15 +1,13 @@
 # larevel eloquent for rqlite
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hushulin/laravel-eloquent-rqlite.svg?style=flat-square)](https://packagist.org/packages/hushulin/laravel-eloquent-rqlite)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/hushulin/laravel-eloquent-rqlite/run-tests?label=tests)](https://github.com/hushulin/laravel-eloquent-rqlite/actions?query=workflow%3Arun-tests+branch%3Amain)
+
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/hushulin/laravel-eloquent-rqlite/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/hushulin/laravel-eloquent-rqlite/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/hushulin/laravel-eloquent-rqlite.svg?style=flat-square)](https://packagist.org/packages/hushulin/laravel-eloquent-rqlite)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-eloquent-rqlite.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-eloquent-rqlite)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
