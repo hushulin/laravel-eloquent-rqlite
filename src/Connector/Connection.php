@@ -78,6 +78,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
         if (isset($result->last_insert_id)) {
             $this->last_insert_id = $result->last_insert_id;
         }
+
         return $result->rowCount();
     }
 

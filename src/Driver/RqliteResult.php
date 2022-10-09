@@ -171,6 +171,7 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
                 return (int) $results[0]['last_insert_id'];
             }
         }
+
         return 0;
     }
 }
