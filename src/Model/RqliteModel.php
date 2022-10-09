@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hushulin\LaravelEloquentRqlite\Model;
 
 use Illuminate\Database\Eloquent\Builder;
