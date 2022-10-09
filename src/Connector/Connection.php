@@ -18,6 +18,8 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
      */
     private Client $connection;
 
+    private int $last_insert_id = 0;
+
     /** @internal The connection can be only instantiated by its driver. */
     public function __construct(Client $connection)
     {
@@ -72,7 +74,11 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
      */
     public function exec(string $sql): int
     {
-        return $this->prepare($sql)->execute()->rowCount();
+        $result = $this->prepare($sql)->execute();
+        if (isset($result->last_insert_id)) {
+            $this->last_insert_id = $result->last_insert_id;
+        }
+        return $result->rowCount();
     }
 
     /**
@@ -84,7 +90,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     public function lastInsertId($name = null): int
     {
         if ($name == null) {
-            return 0;
+            return $this->last_insert_id;
         }
 
         try {
@@ -99,8 +105,8 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
             }
 
             return (int) $result['results'][0]['values'][0][0];
-        } catch (GuzzleException | PDOException $e) {
-            return 0;
+        } catch (GuzzleException | PDOException | \Exception $e) {
+            return $this->last_insert_id;
         }
     }
 

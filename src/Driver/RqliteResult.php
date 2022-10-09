@@ -16,9 +16,15 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
      */
     private int $num = 0;
 
+    /**
+     * @var int 上次插入id
+     */
+    public int $last_insert_id;
+
     public function __construct(array $results)
     {
         $this->results = $results;
+        $this->last_insert_id = $this->getLastInsertId($this->results);
     }
 
     /**
@@ -156,5 +162,15 @@ class RqliteResult implements \Doctrine\DBAL\Driver\Result
         }
 
         return $rows;
+    }
+
+    private function getLastInsertId(array $results): int
+    {
+        if (isset($results[0])) {
+            if (isset($results[0]['last_insert_id'])) {
+                return (int) $results[0]['last_insert_id'];
+            }
+        }
+        return 0;
     }
 }
