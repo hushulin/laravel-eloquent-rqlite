@@ -22,9 +22,7 @@ composer require hushulin/laravel-eloquent-rqlite
 
 lumen framework add below to bootstrap/app.php
 ```php
-$app->resolving('db', function () use ($app) {
-    $app->register(Hushulin\LaravelEloquentRqlite\LaravelEloquentRqliteServiceProvider::class);
-});
+$app->register(Hushulin\LaravelEloquentRqlite\LaravelEloquentRqliteServiceProvider::class);
 ```
 
 lumen framework add config to config/database.php
