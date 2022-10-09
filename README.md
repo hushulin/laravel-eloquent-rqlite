@@ -46,6 +46,8 @@ lumen framework add config to config/database.php
    ]
 ```
 
+You can use eloquent model extend ```\Hushulin\LaravelEloquentRqlite\Model\RqliteModel``` as base model.
+
 You can publish and run the migrations with:
 
 ```bash
