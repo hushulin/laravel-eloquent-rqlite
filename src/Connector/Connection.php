@@ -99,7 +99,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
             }
 
             return (int) $result['results'][0]['values'][0][0];
-        } catch (GuzzleException | PDOException $e) {
+        } catch (GuzzleException | PDOException | \Exception $e) {
             return 0;
         }
     }
