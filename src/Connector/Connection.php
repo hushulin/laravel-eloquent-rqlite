@@ -10,6 +10,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Hushulin\LaravelEloquentRqlite\Driver\RqliteStatement;
 use PDOException;
+use Psr\Http\Message\ResponseInterface;
 
 final class Connection implements \Doctrine\DBAL\Driver\Connection
 {
@@ -89,15 +90,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
 
         try {
             $res = $this->connection->post('/db/query', ['json' => ['SELECT seq FROM sqlite_sequence WHERE name = '.$this->quote($name)]]);
-            $result = json_decode($res->getBody(), true);
-            if (isset($result['results'])) {
-                collect($result['results'])->map(function ($item) {
-                    if (isset($item['error'])) {
-                        throw new PDOException($item['error']);
-                    }
-                });
-            }
-
+            $result = $this->getResultOrFail($res);
             return (int) $result['results'][0]['values'][0][0];
         } catch (GuzzleException | PDOException | \Exception $e) {
             return 0;
@@ -107,7 +100,8 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     public function beginTransaction()
     {
         try {
-            $this->connection->post('/db/execute', ['json' => ['BEGIN']]);
+            $res = $this->connection->post('/db/execute', ['json' => ['BEGIN']]);
+            $this->getResultOrFail($res);
         } catch (GuzzleException $e) {
         }
     }
@@ -115,7 +109,8 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     public function commit()
     {
         try {
-            $this->connection->post('/db/execute', ['json' => ['COMMIT']]);
+            $res = $this->connection->post('/db/execute', ['json' => ['COMMIT']]);
+            $this->getResultOrFail($res);
         } catch (GuzzleException $e) {
         }
     }
@@ -123,7 +118,8 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     public function rollBack()
     {
         try {
-            $this->connection->post('/db/execute', ['json' => ['ROLLBACK']]);
+            $res = $this->connection->post('/db/execute', ['json' => ['ROLLBACK']]);
+            $this->getResultOrFail($res);
         } catch (GuzzleException $e) {
         }
     }
@@ -136,5 +132,22 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     public function getNativeConnection(): Client
     {
         return $this->connection;
+    }
+
+    /**
+     * @param ResponseInterface $res
+     * @return mixed
+     */
+    private function getResultOrFail(ResponseInterface $res)
+    {
+        $result = json_decode($res->getBody(), true);
+        if (isset($result['results'])) {
+            collect($result['results'])->map(function ($item) {
+                if (isset($item['error'])) {
+                    throw new PDOException($item['error']);
+                }
+            });
+        }
+        return $result;
     }
 }
