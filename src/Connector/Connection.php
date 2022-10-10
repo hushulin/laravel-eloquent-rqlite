@@ -91,6 +91,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
         try {
             $res = $this->connection->post('/db/query', ['json' => ['SELECT seq FROM sqlite_sequence WHERE name = '.$this->quote($name)]]);
             $result = $this->getResultOrFail($res);
+
             return (int) $result['results'][0]['values'][0][0];
         } catch (GuzzleException | PDOException | \Exception $e) {
             return 0;
@@ -135,7 +136,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     }
 
     /**
-     * @param ResponseInterface $res
+     * @param  ResponseInterface  $res
      * @return mixed
      */
     private function getResultOrFail(ResponseInterface $res)
@@ -148,6 +149,7 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
                 }
             });
         }
+
         return $result;
     }
 }
