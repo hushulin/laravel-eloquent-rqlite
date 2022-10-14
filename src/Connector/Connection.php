@@ -100,29 +100,32 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
 
     public function beginTransaction()
     {
-        try {
-            $res = $this->connection->post('/db/execute', ['json' => ['BEGIN']]);
-            $this->getResultOrFail($res);
-        } catch (GuzzleException $e) {
-        }
+        throw new PDOException('BEGIN invalid for rqlite.');
+        //try {
+        //    $res = $this->connection->post('/db/execute', ['json' => ['BEGIN']]);
+        //    $this->getResultOrFail($res);
+        //} catch (GuzzleException $e) {
+        //}
     }
 
     public function commit()
     {
-        try {
-            $res = $this->connection->post('/db/execute', ['json' => ['COMMIT']]);
-            $this->getResultOrFail($res);
-        } catch (GuzzleException $e) {
-        }
+        throw new PDOException('COMMIT invalid for rqlite.');
+        //try {
+        //    $res = $this->connection->post('/db/execute', ['json' => ['COMMIT']]);
+        //    $this->getResultOrFail($res);
+        //} catch (GuzzleException $e) {
+        //}
     }
 
     public function rollBack()
     {
-        try {
-            $res = $this->connection->post('/db/execute', ['json' => ['ROLLBACK']]);
-            $this->getResultOrFail($res);
-        } catch (GuzzleException $e) {
-        }
+        throw new PDOException('ROLLBACK invalid for rqlite.');
+        //try {
+        //    $res = $this->connection->post('/db/execute', ['json' => ['ROLLBACK']]);
+        //    $this->getResultOrFail($res);
+        //} catch (GuzzleException $e) {
+        //}
     }
 
     /**

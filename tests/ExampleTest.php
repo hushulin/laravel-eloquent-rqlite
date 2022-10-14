@@ -28,8 +28,10 @@ it('rqlite transaction', function () {
         });
         expect(1)->toBeInt();
     } catch (Throwable $e) {
+        dump($e);
     }
 })->skip(false);
+
 
 it('rqlite model', function () {
     $c = EloquentRqlite::query()->first();
