@@ -32,7 +32,6 @@ it('rqlite transaction', function () {
     }
 })->skip(false);
 
-
 it('rqlite model', function () {
     $c = EloquentRqlite::query()->first();
     dump('--------------- rqlite eloquent model first id ------------------', $c->id);
