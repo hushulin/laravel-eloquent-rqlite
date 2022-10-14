@@ -139,13 +139,14 @@ final class Connection implements \Doctrine\DBAL\Driver\Connection
     }
 
     /**
-     * @param array $rqliteSqlLists
+     * @param  array  $rqliteSqlLists
      * @return mixed
      */
     public function transactionRaw(array $rqliteSqlLists)
     {
         try {
             $res = $this->connection->post('/db/execute?transaction', ['json' => $rqliteSqlLists]);
+
             return $this->getResultOrFail($res);
         } catch (GuzzleException $e) {
         }
